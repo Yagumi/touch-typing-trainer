@@ -11,6 +11,7 @@ export const fetchArticle = createAsyncThunk(
 const modalSlice = createSlice({
   name: 'modal',
   initialState: {
+    isOpen: true,
     isFetching: false,
     fetchError: null,
     article: '',
@@ -31,4 +32,5 @@ const modalSlice = createSlice({
 })
 
 const { actions, reducer } = modalSlice;
+export const selectArticle = state => state.modal.article;
 export default reducer;
