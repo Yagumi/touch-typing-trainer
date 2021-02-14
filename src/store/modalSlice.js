@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const fetchArticle = createAsyncThunk(
   'modal/fetchArticle',
   async () => {
-    const response = await fetch('https://baconipsum.com/api/?type=all-meat&paras=2&start-with-lorem=1');
+    const response = await fetch('https://baconipsum.com/api/?type=all-meat&paras=1&start-with-lorem=1');
     return response.json();
   }
 )
@@ -26,7 +26,7 @@ const modalSlice = createSlice({
       state.isFetching = true;
     },
     [fetchArticle.fulfilled]: (state, { payload }) => {
-      state.article = payload;
+      state.article = payload[0];
       state.isFetching = false;
     },
     [fetchArticle.rejected]: (state, { error }) => {
