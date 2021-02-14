@@ -16,6 +16,11 @@ const modalSlice = createSlice({
     fetchError: null,
     article: '',
   },
+  reducers: {
+    toggleModal: (state, action) => {
+      state.isOpen = !state.isOpen;
+    }
+  },
   extraReducers: {
     [fetchArticle.pending]: (state, action) => {
       state.isFetching = true;
@@ -32,5 +37,9 @@ const modalSlice = createSlice({
 })
 
 const { actions, reducer } = modalSlice;
-export const selectArticle = state => state.modal.article;
+
+export const selectIsOpen = ({ modal }) => modal.isOpen;
+export const selectArticle = ({ modal }) => modal.article;
+
+export const { toggleModal } = actions;
 export default reducer;
