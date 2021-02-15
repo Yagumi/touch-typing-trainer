@@ -1,23 +1,58 @@
-import React, { useState,useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import "./app.scss";
 
 import { selectIsOpen } from './store/modalSlice';
 import { Modal } from './components/modal/Modal';
 import { Field } from './components/field/Field';
+import {
+  fetchArticle,
+  selectCurrentIndex,
+  selectCurrentLetter,
+  selectArticle,
+  setCurrentIndex,
+  setCurrentLetter,
+  setIsActive,
+  setIsError } from './store/fieldSlice';
 
 export const App = () => {
   const isOpenModal = useSelector(selectIsOpen);
-  const [currentLetter, setCurrentLetter] = useState()
-  const nextStep = () => {
+  const letters = useSelector(selectArticle);
+  const currentLetter = useSelector(selectCurrentLetter);
+  const currentIndex = useSelector(selectCurrentIndex);
 
-  }
+  const dispatch = useDispatch();
+
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
-      setCurrentLetter(e.key);
+      if(e.key === 'Shift') {
+        return
+      } else {
+        dispatch(setCurrentLetter(e.key));
+      }
+      
     });
-  }, [])
+  }, []);
+  
+  useEffect(() => {
+    dispatch(fetchArticle())
+  },[dispatch]);
+
+  useEffect(() => {
+    if(letters) {
+      const { letter, id } = letters[currentIndex];
+      if(currentLetter === letter) {
+        // console.log('yes')
+          dispatch(setCurrentIndex());
+          dispatch(setIsActive(currentIndex+1))
+      } else {
+        // console.log('no')
+        dispatch(setIsError(id))
+      }
+    }
+    return 
+  }, [currentLetter]);
 
   return (
     <div 
@@ -25,7 +60,6 @@ export const App = () => {
     >
         {isOpenModal && <Modal />}
         <Field />
-        {currentLetter}
     </div>
   );
 }

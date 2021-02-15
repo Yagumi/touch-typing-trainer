@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import './modal.scss';
 
-import { fetchArticle, toggleModal } from '../../store/modalSlice'
+import { toggleModal } from '../../store/modalSlice'
 
 
 export const Modal = () => {
@@ -12,10 +12,6 @@ export const Modal = () => {
   const handleToggle = () => {
     dispatch(toggleModal());
   }
-
-  useEffect(() => {
-    dispatch(fetchArticle());
-  },[dispatch]);
 
   return (
     <div className="modal__wrapper">

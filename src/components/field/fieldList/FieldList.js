@@ -5,23 +5,29 @@ import './fieldList.scss';
 
 import { FieldItem } from '../fieldItem/FieldItem';
 
-export const FieldList = ({letters, currentIndex}) => {
+export const FieldList = ({letters}) => {
   return (
     <div className="field__list">
-      {
-        letters.map((letter, index) => (
+      {letters
+        ? letters.map( item => (
           <FieldItem 
-            key={index}
-            letter={letter}
-            isActive={currentIndex === index && true}
+            key={item.id}
+            letter={item.letter}
+            isActive={item.isActive}
+            isError={item.isError}
           />
         ))
+        : null
       }
     </div>
   )
 }
 
 FieldList.propTypes = {
-  letters: PropTypes.arrayOf(PropTypes.string),
-  currentIndex: PropTypes.number,
+  letters: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    letter: PropTypes.string.isRequired,
+    isActive: PropTypes.bool.isRequired,
+    isError: PropTypes.bool.isRequired,
+  })),
 }
