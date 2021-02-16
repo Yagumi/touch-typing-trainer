@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import gun from '../../static/img/gun.png';
+import rocket from '../../static/img/rocket.png';
 
 import { toggleModalStart } from '../../store/modalSlice';
 import { setStartTime } from '../../store/fieldSlice';
@@ -17,8 +17,8 @@ export const ModalStart = () => {
 
   return (
     <Modal
-      imgUrl={gun}
-      imgAlt='Ружье' 
+      imgUrl={rocket}
+      imgAlt='Ракета' 
       title="Приготовься печатать. Поехали!"
       handleToggle={handleToggle}
       buttonText="Начать печать"
