@@ -29,14 +29,16 @@ export const ModalFinish = () => {
       buttonText="Попробовать еще раз"
     >
       <div>
-        <img src={timerImg} alt="Таймер" />
-        <span>Скорость</span>
-        <span>{speed} зн./мин</span>
-      </div>
-      <div>
-        <img src={accuracyImg} alt="Точность" />
-        <span>Точность</span>
-        <span>{accuracy} %</span>
+        <div>
+          <img  src={timerImg} alt="Таймер" />
+          <span>Скорость</span>
+          <span> {speed} зн./мин</span>
+        </div>
+        <div>
+          <img src={accuracyImg} alt="Точность" />
+          <span>Точность</span>
+          <span> {accuracy} %</span>
+        </div>
       </div>
     </Modal>
   )
