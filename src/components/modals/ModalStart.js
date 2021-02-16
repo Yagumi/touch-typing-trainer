@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import './modal.scss';
 
-import { toggleModal, setStartTime } from '../../store/modalSlice';
+import { toggleModal } from '../../store/modalSlice';
+import { setStartTime } from '../../store/fieldSlice';
 import { Modal } from './Modal';
 
 export const ModalStart = () => {

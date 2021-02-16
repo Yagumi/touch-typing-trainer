@@ -1,15 +1,18 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import timerImg from '../../static/img/timer.png';
 import accuracyImg from '../../static/img/accuracy.png';
 
 
 import { Modal } from './Modal';
-import { restart } from '../../store/fieldSlice';
+import { restart, selectSpeed, selectAccuracy } from '../../store/fieldSlice';
 import { toggleModalFinish } from '../../store/modalSlice';
 
 export const ModalFinish = () => {
+  const speed = useSelector(selectSpeed);
+  const accuracy = useSelector(selectAccuracy);
+
   const dispatch = useDispatch();
 
   const handleToggle = () => {
@@ -26,12 +29,12 @@ export const ModalFinish = () => {
       <div>
         <img src={timerImg} alt="Таймер" />
         <span>Скорость</span>
-        <span>{150} зн./мин</span>
+        <span>{speed} зн./мин</span>
       </div>
       <div>
         <img src={accuracyImg} alt="Точность" />
         <span>Точность</span>
-        <span>{100} %</span>
+        <span>{accuracy} %</span>
       </div>
     </Modal>
   )

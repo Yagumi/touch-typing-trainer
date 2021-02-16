@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 
 import "./field.scss";
 
-import { selectArticle } from '../../store/fieldSlice';
+import { 
+  selectArticle,
+} from '../../store/fieldSlice';
 import { FieldList } from './fieldList/FieldList';
 import { Stats } from '../stats/Stats';
 

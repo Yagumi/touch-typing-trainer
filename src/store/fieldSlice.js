@@ -14,14 +14,20 @@ const fieldSlice = createSlice({
     isFetching: false,
     fetchError: null,
     article: null,
+    startTime: null,
     currentLetter: null,
     currentIndex: 0,
     numberOfCorrectLetters: 0,
     numberOfErrors: 0,
     isRestart: false,
     articleLength: 0,
+    speed: '0',
+    accuracy: '0',
   },
   reducers: {
+    setStartTime: (state, action) => {
+      state.startTime = Date.now();
+    },
     setIsActive: (state, { payload }) => {
       if(payload === state.articleLength) return;
 
@@ -51,6 +57,21 @@ const fieldSlice = createSlice({
       state.numberOfErrors = 0;
       state.isRestart = !state.isRestart;
     },
+    getSpeed: (state, action) => {
+      const timeLast =  Date.now() - state.startTime;
+      const crm = state.numberOfCorrectLetters / ( timeLast / 1000 / 60 );
+      const result = crm - (state.numberOfErrors /  (timeLast / 1000 / 60));
+
+      if(result <= 0) state.speed = '0';
+      else state.speed = result.toFixed();
+      
+    },
+    getAccuracy: (state, action) => {
+      const result = 100 - state.numberOfErrors * 100 / state.numberOfCorrectLetters;
+      
+      if(result <= 0) state.accuracy = '0';
+      else state.accuracy = result.toFixed(2);
+    }
   },
   extraReducers: {
     [fetchArticle.pending]: (state, action) => {
@@ -99,15 +120,18 @@ export const selectNumberOfCorrectLetters = ({field}) => field.numberOfCorrectLe
 export const selectNumberOfErrors = ({field}) => field.numberOfErrors;
 export const selectIsRestart = ({field}) => field.isRestart;
 export const selectArticleLength = ({field}) => field.articleLength;
-
+export const selectSpeed = ({field}) => field.speed;
+export const selectAccuracy = ({field}) => field.accuracy;
 
 export const {
+  setStartTime,
   setCurrentLetter,
   setCurrentIndex,
   setIsActive,
   setIsError,
   restart,
-  calculateSpeed,
+  getSpeed,
+  getAccuracy,
 } = actions;
 
 export default reducer;

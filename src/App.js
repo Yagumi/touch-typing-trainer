@@ -25,6 +25,8 @@ import {
   setIsError,
   selectIsRestart,
   selectArticleLength,
+  getSpeed,
+  getAccuracy,
  } from './store/fieldSlice';
 
 export const App = () => {
@@ -71,14 +73,20 @@ export const App = () => {
   useEffect(() => {
     if(letters && !isOpenModal && !isOpenModalKeyboard && !isOpenModalFinish) {
       const { letter, id } = letters[currentIndex];
+
       if(currentIndex+1 === articleLength) {
         dispatch(toggleModalFinish());
       }
+
       if(currentLetter === letter) {
         dispatch(setCurrentIndex());
-        dispatch(setIsActive(currentIndex+1))
+        dispatch(setIsActive(currentIndex+1));
+        dispatch(getSpeed())
+        dispatch(getAccuracy());
       } else {
-        dispatch(setIsError(id))
+        dispatch(setIsError(id));
+        dispatch(getSpeed())
+        dispatch(getAccuracy());
       }
     }
     return 
