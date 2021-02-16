@@ -3,9 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import "./app.scss";
 
-import { selectIsOpen } from './store/modalSlice';
-import { Modal } from './components/modal/Modal';
+import {
+  selectIsOpen,
+  selectIsOpenModalKeyboard,
+  toggleModalKeyboard,
+  toggleModalFinish,
+  selectIsOpenModalFinish } from './store/modalSlice';
+import { ModalStart } from './components/modals/ModalStart';
 import { Field } from './components/field/Field';
+import { ModalKeyboard } from './components/modals/ModalKeyboard';
+import { ModalFinish } from './components/modals/ModalFinish';
 
 import {
   fetchArticle,
@@ -17,6 +24,7 @@ import {
   setIsActive,
   setIsError,
   selectIsRestart,
+  selectArticleLength,
  } from './store/fieldSlice';
 
 export const App = () => {
@@ -25,17 +33,22 @@ export const App = () => {
   const currentLetter = useSelector(selectCurrentLetter);
   const currentIndex = useSelector(selectCurrentIndex);
   const isRestart = useSelector(selectIsRestart);
+  const isOpenModalKeyboard = useSelector(selectIsOpenModalKeyboard);
+  const articleLength = useSelector(selectArticleLength);
+  const isOpenModalFinish = useSelector(selectIsOpenModalFinish);
 
   const dispatch = useDispatch();
 
   const handleKeyDown = useCallback((e) => {
-    console.log(isOpenModal)
+    const re = /\d|\w|[\.\$@\*\\\/\+\-\^\!\(\)\[\]\~\%\&\=\?\>\<\{\}\"\'\,\:\;\_\ ]/g;
     if(isOpenModal) {
       e.preventDefault()
       return
     } else {
-      if(e.key === 'Shift') {
+      if(e.key === 'Shift' || e.key == 'Alt') {
         return
+      } else if(!e.key.match(re)){
+        dispatch(toggleModalKeyboard());
       } else {
         dispatch(setCurrentLetter(e.key));
       }
@@ -56,14 +69,15 @@ export const App = () => {
   },[isRestart]);
 
   useEffect(() => {
-    if(letters && !isOpenModal) {
+    if(letters && !isOpenModal && !isOpenModalKeyboard && !isOpenModalFinish) {
       const { letter, id } = letters[currentIndex];
+      if(currentIndex+1 === articleLength) {
+        dispatch(toggleModalFinish());
+      }
       if(currentLetter === letter) {
-        // console.log('yes')
-          dispatch(setCurrentIndex());
-          dispatch(setIsActive(currentIndex+1))
+        dispatch(setCurrentIndex());
+        dispatch(setIsActive(currentIndex+1))
       } else {
-        // console.log('no')
         dispatch(setIsError(id))
       }
     }
@@ -74,8 +88,10 @@ export const App = () => {
     <div 
       className="app"
     >
-        {isOpenModal && <Modal />}
+        {isOpenModal && <ModalStart />}
         <Field />
+        {isOpenModalKeyboard && <ModalKeyboard />}
+        {isOpenModalFinish && <ModalFinish />}
     </div>
   );
 }

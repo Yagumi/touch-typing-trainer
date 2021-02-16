@@ -19,9 +19,12 @@ const fieldSlice = createSlice({
     numberOfCorrectLetters: 0,
     numberOfErrors: 0,
     isRestart: false,
+    articleLength: 0,
   },
   reducers: {
     setIsActive: (state, { payload }) => {
+      if(payload === state.articleLength) return;
+
       let item = state.article.find((_, index) => index === payload - 1)
       item.isActive = false;
       item.isError = false;
@@ -55,9 +58,8 @@ const fieldSlice = createSlice({
     },
     [fetchArticle.fulfilled]: (state, { payload }) => {
       let id = -1;
-
-      state.article = payload[0]
-        .replace(/\s+/g, ' ')
+      const articleReplaced = payload[0].replace(/\s+/g, ' ')
+      state.article = articleReplaced
         .split('')
         .map((item, index) => {
           id++;
@@ -77,6 +79,8 @@ const fieldSlice = createSlice({
             isError: false
           }
         });
+
+      state.articleLength = articleReplaced.length;
       state.isFetching = false;
     },
     [fetchArticle.rejected]: (state, { error }) => {
@@ -94,6 +98,8 @@ export const selectArticle = ({field }) => field.article;
 export const selectNumberOfCorrectLetters = ({field}) => field.numberOfCorrectLetters;
 export const selectNumberOfErrors = ({field}) => field.numberOfErrors;
 export const selectIsRestart = ({field}) => field.isRestart;
+export const selectArticleLength = ({field}) => field.articleLength;
+
 
 export const {
   setCurrentLetter,
@@ -101,6 +107,7 @@ export const {
   setIsActive,
   setIsError,
   restart,
+  calculateSpeed,
 } = actions;
 
 export default reducer;

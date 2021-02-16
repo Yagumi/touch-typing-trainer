@@ -14,6 +14,7 @@ import { selectNumberOfCorrectLetters, selectNumberOfErrors } from '../../store/
 import { selectStartTime } from '../../store/modalSlice';
 
 export const Stats = () => {
+  console.log('as')
   const numberOfCorrectLetters = useSelector(selectNumberOfCorrectLetters);
   const numberOfErrors = useSelector(selectNumberOfErrors);
   const startTime = useSelector(selectStartTime);

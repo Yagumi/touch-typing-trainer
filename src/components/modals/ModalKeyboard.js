@@ -1,0 +1,19 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { Modal } from './Modal';
+import { toggleModalKeyboard } from '../../store/modalSlice';
+
+export const ModalKeyboard = () => {
+  const dispatch = useDispatch();
+
+  const handleToggle = () => dispatch(toggleModalKeyboard());
+
+  return (
+    <Modal
+      title="Пожалуйста, смени раскладку клавиатуры на Английский."
+      handleToggle={handleToggle}
+      buttonText="Продолжить"
+    />
+  )
+}
