@@ -78,9 +78,9 @@ const fieldSlice = createSlice({
       state.isFetching = true;
     },
     [fetchArticle.fulfilled]: (state, { payload }) => {
-      console.log(payload)
       let id = -1;
-      const articleReplaced = payload[0].replace(/\s+/g, ' ')
+      const articleReplaced = payload[0].replace(/\s+/g, ' ');
+      
       state.article = articleReplaced
         .split('')
         .map((item, index) => {

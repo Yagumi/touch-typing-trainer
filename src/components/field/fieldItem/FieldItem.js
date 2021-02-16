@@ -11,7 +11,6 @@ export const FieldItem = React.memo(({ letter, isActive, isError }) => {
         style={{
           backgroundColor: isError ? '#F36747': 'white',
           color: isError && '#fff',
-          // padding: '0 3px', 
         }}
       >
         {letter}
@@ -24,8 +23,7 @@ export const FieldItem = React.memo(({ letter, isActive, isError }) => {
         className="field__item"
         style={{
           backgroundColor: isActive ? '#5bc538': 'white',
-          color: isActive && '#fff',
-          // padding: isActive && "0 3px",    
+          color: isActive && '#fff', 
         }}
       >
         {letter}
