@@ -20,16 +20,18 @@
   box-shadow: #3ca5f2 0 0 30px;
   border-radius: 10px;
   text-align: center;
-  padding-top: 30px;
-  padding-bottom: 25px;
+  padding: 30px 25px 25px 25px;
 
   &__img {
     height: 80px;
     width: 80px;
     border-radius: 40px;
-    background: #e4f9ff url(/static/img/gun.png) center center no-repeat;
-    background-size: 90%;
     margin: 0 auto;
+  }
+
+  &__img > img {
+    width: 100%;
+    height: auto;
   }
 
   &__title {

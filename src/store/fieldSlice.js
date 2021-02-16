@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchArticle = createAsyncThunk(
   'modal/fetchArticle',
   async () => {
-    const response = await fetch('https://baconipsum.com/api/?type=all-meat&paras=1&start-with-lorem=1');
+    const response = await fetch(process.env.REACT_APP_BASE_URL);
     return response.json();
   }
 )

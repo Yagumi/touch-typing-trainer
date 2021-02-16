@@ -43,7 +43,8 @@ export const App = () => {
 
   const handleKeyDown = useCallback((e) => {
     const re = /\d|\w|[\.\$@\*\\\/\+\-\^\!\(\)\[\]\~\%\&\=\?\>\<\{\}\"\'\,\:\;\_\ ]/g;
-    if(isOpenModal) {
+
+    if(isOpenModal || isOpenModalKeyboard) {
       e.preventDefault()
       return
     } else {
@@ -56,7 +57,7 @@ export const App = () => {
       }
     }
     
-  }, [isOpenModal])
+  }, [isOpenModal, isOpenModalKeyboard])
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);

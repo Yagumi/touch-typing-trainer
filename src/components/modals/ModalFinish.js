@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import timerImg from '../../static/img/timer.png';
 import accuracyImg from '../../static/img/accuracy.png';
-
+import cracker from '../../static/img/cracker.png';
 
 import { Modal } from './Modal';
 import { restart, selectSpeed, selectAccuracy } from '../../store/fieldSlice';
@@ -22,6 +22,8 @@ export const ModalFinish = () => {
 
   return (
     <Modal
+      imgUrl={cracker}
+      imgAlt="Хлопушка"
       title="Твои результаты"
       handleToggle={handleToggle}
       buttonText="Попробовать еще раз"

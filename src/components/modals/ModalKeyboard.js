@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import globe from '../../static/img/globe.png';
+
 import { Modal } from './Modal';
 import { toggleModalKeyboard } from '../../store/modalSlice';
 
@@ -11,7 +13,9 @@ export const ModalKeyboard = () => {
 
   return (
     <Modal
-      title="Пожалуйста, смени раскладку клавиатуры на Английский."
+      imgUrl={globe}
+      imgAlt="Глобус"
+      title="Пожалуйста, смени раскладку клавиатуры на Английский язык."
       handleToggle={handleToggle}
       buttonText="Продолжить"
     />
