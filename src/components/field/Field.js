@@ -5,6 +5,7 @@ import "./field.scss";
 
 import { selectArticle } from '../../store/fieldSlice';
 import { FieldList } from './fieldList/FieldList';
+import { Stats } from '../stats/Stats';
 
 export const Field = () => {
   const letters = useSelector(selectArticle);
@@ -14,6 +15,7 @@ export const Field = () => {
       <FieldList
         letters={letters}
       />
+      <Stats />
     </div>
   )
 }

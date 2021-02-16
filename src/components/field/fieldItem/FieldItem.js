@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './fieldItem.scss';
+
 export const FieldItem = React.memo(({ letter, isActive, isError }) => {
-  console.log(isError)
   if(isError) {
     return (
       <span
+        className="field__item"
         style={{
-          backgroundColor: isError ? 'red': 'white'  
+          backgroundColor: isError ? '#F36747': 'white',
+          color: isError && '#fff',  
         }}
       >
         {letter}
@@ -17,8 +20,10 @@ export const FieldItem = React.memo(({ letter, isActive, isError }) => {
   } else {
     return (
       <span
+        className="field__item"
         style={{
-          backgroundColor: isActive ? 'green': 'white'  
+          backgroundColor: isActive ? '#5bc538': 'white',
+          color: isActive && '#fff',    
         }}
       >
         {letter}

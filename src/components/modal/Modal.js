@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import './modal.scss';
 
-import { toggleModal } from '../../store/modalSlice'
+import { toggleModal, setStartTime } from '../../store/modalSlice'
 
 
 export const Modal = () => {
@@ -11,6 +11,7 @@ export const Modal = () => {
   
   const handleToggle = () => {
     dispatch(toggleModal());
+    dispatch(setStartTime());
   }
 
   return (

@@ -18,6 +18,7 @@ const fieldSlice = createSlice({
     currentIndex: 0,
     numberOfCorrectLetters: 0,
     numberOfErrors: 0,
+    isRestart: false,
   },
   reducers: {
     setIsActive: (state, { payload }) => {
@@ -38,6 +39,14 @@ const fieldSlice = createSlice({
     },
     setCurrentIndex: (state, { payload }) => {
       state.currentIndex = state.currentIndex + 1;
+    },
+    restart: (state, action) => {
+      state.article = null;
+      state.currentLetter = null;
+      state.currentIndex = 0;
+      state.numberOfCorrectLetters = 0;
+      state.numberOfErrors = 0;
+      state.isRestart = !state.isRestart;
     },
   },
   extraReducers: {
@@ -82,7 +91,16 @@ const { actions, reducer } = fieldSlice;
 export const selectCurrentLetter = ({ field }) => field.currentLetter;
 export const selectCurrentIndex = ({field }) => field.currentIndex;
 export const selectArticle = ({field }) => field.article;
+export const selectNumberOfCorrectLetters = ({field}) => field.numberOfCorrectLetters;
+export const selectNumberOfErrors = ({field}) => field.numberOfErrors;
+export const selectIsRestart = ({field}) => field.isRestart;
 
-export const { setCurrentLetter, setCurrentIndex, setIsActive, setIsError } = actions;
+export const {
+  setCurrentLetter,
+  setCurrentIndex,
+  setIsActive,
+  setIsError,
+  restart,
+} = actions;
 
 export default reducer;
