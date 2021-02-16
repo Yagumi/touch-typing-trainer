@@ -1,0 +1,22 @@
+.stat {
+  margin-bottom: 10px;
+  &__title {
+    font-family: Arial, Tahoma, Verdana, sans-serif;
+    color: #b5bbc2;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-left: 5px;
+  }
+  &__data {
+    color: #67defd;
+    font-size: 32px;
+    font-weight: 400;
+  }
+  &__text {
+    padding-left: 5px;
+    color: #67defd;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+}
