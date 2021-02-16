@@ -7,7 +7,7 @@
 >
 > 3.Open a terminal at the root of the your project folder or use terminal in code editor and type command `npm install`
 >
-> 4.Run `npm run start` in a terminal or use terminal in code editor and type command.
+> 4.Next type `npm run start` in a terminal or use terminal in code editor.
 >
 > 5.Runs the app in the development mode.<br />
 > Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
