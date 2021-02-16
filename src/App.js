@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import "./app.scss";
 
 import {
-  selectIsOpen,
+  selectIsOpenModalStart,
   selectIsOpenModalKeyboard,
   toggleModalKeyboard,
   toggleModalFinish,
@@ -30,7 +30,7 @@ import {
  } from './store/fieldSlice';
 
 export const App = () => {
-  const isOpenModal = useSelector(selectIsOpen);
+  const isOpenModalStart = useSelector(selectIsOpenModalStart);
   const letters = useSelector(selectArticle);
   const currentLetter = useSelector(selectCurrentLetter);
   const currentIndex = useSelector(selectCurrentIndex);
@@ -44,7 +44,7 @@ export const App = () => {
   const handleKeyDown = useCallback((e) => {
     const re = /\d|\w|[\.\$@\*\\\/\+\-\^\!\(\)\[\]\~\%\&\=\?\>\<\{\}\"\'\,\:\;\_\ ]/g;
 
-    if(isOpenModal || isOpenModalKeyboard) {
+    if(isOpenModalStart || isOpenModalKeyboard) {
       e.preventDefault()
       return
     } else {
@@ -57,7 +57,7 @@ export const App = () => {
       }
     }
     
-  }, [isOpenModal, isOpenModalKeyboard])
+  }, [isOpenModalStart, isOpenModalKeyboard])
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -65,21 +65,22 @@ export const App = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     }
-  }, [isOpenModal]);
+  }, [isOpenModalStart]);
 
   useEffect(() => {
     dispatch(fetchArticle())
   },[isRestart]);
 
   useEffect(() => {
-    if(letters && !isOpenModal && !isOpenModalKeyboard && !isOpenModalFinish) {
+    
+    if(letters && !isOpenModalStart && !isOpenModalKeyboard && !isOpenModalFinish) {
       const { letter, id } = letters[currentIndex];
 
       if(currentIndex+1 === articleLength) {
         dispatch(toggleModalFinish());
       }
 
-      if(currentLetter === letter) {
+      if(currentLetter[currentLetter.length - 1] === letter) {
         dispatch(setCurrentIndex());
         dispatch(setIsActive(currentIndex+1));
         dispatch(getSpeed())
@@ -90,14 +91,13 @@ export const App = () => {
         dispatch(getAccuracy());
       }
     }
-    return 
   }, [currentLetter]);
 
   return (
     <div 
       className="app"
     >
-        {isOpenModal && <ModalStart />}
+        {isOpenModalStart && <ModalStart />}
         <Field />
         {isOpenModalKeyboard && <ModalKeyboard />}
         {isOpenModalFinish && <ModalFinish />}

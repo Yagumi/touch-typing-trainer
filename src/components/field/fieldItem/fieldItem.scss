@@ -1,5 +1,8 @@
 .field__item {
+  min-width: 5px;
+  flex-shrink: 1;
   font-size: 21px;
   line-height: 32px;
-  letter-spacing: 1.5px;
+  font-family: Arial, Tahoma, Verdana, sans-serif;
+  padding: 0 1px;
 }

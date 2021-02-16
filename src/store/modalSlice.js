@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 const modalSlice = createSlice({
   name: 'modal',
   initialState: {
-    isOpen: true,
+    isOpenStart: true,
     isOpenModalKeyboard: false,
     isOpenModalFinish: false,
   },
   reducers: {
-    toggleModal: (state, action) => {
-      state.isOpen = !state.isOpen;
+    toggleModalStart: (state, action) => {
+      state.isOpenStart = !state.isOpenStart;
     },
     toggleModalKeyboard(state, action) {
       state.isOpenModalKeyboard = !state.isOpenModalKeyboard;
@@ -22,12 +22,12 @@ const modalSlice = createSlice({
 
 const { actions, reducer } = modalSlice;
 
-export const selectIsOpen = ({modal}) => modal.isOpen;
+export const selectIsOpenModalStart = ({modal}) => modal.isOpenStart;
 export const selectIsOpenModalKeyboard = ({modal}) => modal.isOpenModalKeyboard;
 export const selectIsOpenModalFinish = ({modal}) => modal.isOpenModalFinish
 
 export const {
-  toggleModal,
+  toggleModalStart,
   toggleModalKeyboard,
   toggleModalFinish } = actions;
 

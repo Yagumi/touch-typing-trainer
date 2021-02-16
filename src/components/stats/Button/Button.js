@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux';
 import './button.scss';
 
 import { restart } from '../../../store/fieldSlice';
-import { toggleModal } from '../../../store/modalSlice';
+import { toggleModalStart } from '../../../store/modalSlice';
 
 export const Button = ({ imgUrl }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(restart());
-    dispatch(toggleModal());
+    dispatch(toggleModalStart());
   }
   return (
     <button

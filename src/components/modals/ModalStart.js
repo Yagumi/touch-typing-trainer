@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import gun from '../../static/img/gun.png';
 
-import { toggleModal } from '../../store/modalSlice';
+import { toggleModalStart } from '../../store/modalSlice';
 import { setStartTime } from '../../store/fieldSlice';
 import { Modal } from './Modal';
 
@@ -11,7 +11,7 @@ export const ModalStart = () => {
   const dispatch = useDispatch();
   
   const handleToggle = () => {
-    dispatch(toggleModal());
+    dispatch(toggleModalStart());
     dispatch(setStartTime());
   }
 

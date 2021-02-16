@@ -44,7 +44,7 @@ const fieldSlice = createSlice({
       state.numberOfErrors = state.numberOfErrors + 1;
     },
     setCurrentLetter: (state, { payload }) => {
-      state.currentLetter = payload;
+      state.currentLetter = `${state.currentIndex}${payload}`;
     },
     setCurrentIndex: (state, { payload }) => {
       state.currentIndex = state.currentIndex + 1;

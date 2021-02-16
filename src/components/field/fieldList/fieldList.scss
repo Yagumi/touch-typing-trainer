@@ -1,4 +1,8 @@
 .field__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
   width: 75%;
   font-size: 21px;
   line-height: 32px;
